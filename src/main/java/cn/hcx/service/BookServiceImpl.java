@@ -1,5 +1,6 @@
 package cn.hcx.service;
 
+import cn.hcx.aspect.MyLog;
 import cn.hcx.dao.BookDao;
 import cn.hcx.dao.BookDaoImpl;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, readOnly = false)
+    @MyLog(value = "购买图书")
     public void purchase(String userId, String isbn)
     {
         //获取图书价格

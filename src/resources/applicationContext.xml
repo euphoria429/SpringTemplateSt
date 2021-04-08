@@ -56,19 +56,20 @@
             <aop:pointcut id="myPointCut" expression="execution(* cn.hcx.service.*.*(..))"/>
             <!--3.2 关联通知Advice和切入点pointCut-->
             <!--3.2.1 前置通知-->
-            <aop:before method="myBefore" pointcut-ref="myPointCut"></aop:before>
-            <!--3.2.2 后置通知，在方法返回之后执行，就可以获得返回值
-            returning：指定形参名，通过该形参访问目标方法抛出的异常-->
-            <aop:after-returning method="myAfterReturning" pointcut-ref="myPointCut" returning="joinPoint"></aop:after-returning>
-            <!--3.2.3 环绕通知-->
-            <aop:around method="myAround" pointcut-ref="myPointCut"></aop:around>
-            <!--3.2.4 抛出通知：用于处理程序发生异常-->
-            <!--注意：如果程序没有异常，将不会执行增强-->
-            <!--throwing属性：用于设置通知第二个参数的名称，类型Throwable-->
-            <aop:after-throwing method="myAfterThrowing" pointcut-ref="myPointCut" throwing="e"></aop:after-throwing>
-            <!--3.2.5 最终通知：无论程序发生任何事情，都将执行-->
-            <aop:after method="myAfter" pointcut-ref="myPointCut"></aop:after>
+            <!--<aop:before method="myBefore" pointcut-ref="myPointCut"></aop:before>-->
+            <!--&lt;!&ndash;3.2.2 后置通知，在方法返回之后执行，就可以获得返回值-->
+            <!--returning：指定形参名，通过该形参访问目标方法抛出的异常&ndash;&gt;-->
+            <!--<aop:after-returning method="myAfterReturning" pointcut-ref="myPointCut" returning="joinPoint"></aop:after-returning>-->
+            <!--&lt;!&ndash;3.2.3 环绕通知&ndash;&gt;-->
+            <!--<aop:around method="myAround" pointcut-ref="myPointCut"></aop:around>-->
+            <!--&lt;!&ndash;3.2.4 抛出通知：用于处理程序发生异常&ndash;&gt;-->
+            <!--&lt;!&ndash;注意：如果程序没有异常，将不会执行增强&ndash;&gt;-->
+            <!--&lt;!&ndash;throwing属性：用于设置通知第二个参数的名称，类型Throwable&ndash;&gt;-->
+            <!--<aop:after-throwing method="myAfterThrowing" pointcut-ref="myPointCut" throwing="e"></aop:after-throwing>-->
+            <!--&lt;!&ndash;3.2.5 最终通知：无论程序发生任何事情，都将执行&ndash;&gt;-->
+            <!--<aop:after method="myAfter" pointcut-ref="myPointCut"></aop:after>-->
         </aop:aspect>
     </aop:config>
+    <aop:aspectj-autoproxy  proxy-target-class="true"/>
 
 </beans>

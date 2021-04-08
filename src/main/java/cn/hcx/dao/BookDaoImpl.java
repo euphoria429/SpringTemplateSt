@@ -1,6 +1,7 @@
 package cn.hcx.dao;
 
 
+import cn.hcx.aspect.MyLog;
 import cn.hcx.bean.Account;
 import cn.hcx.bean.Book;
 import cn.hcx.bean.User;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 
 import javax.annotation.Resource;
+import java.lang.annotation.Documented;
 
 @Repository("bookDao")
 public class BookDaoImpl implements BookDao {
@@ -20,6 +22,7 @@ public class BookDaoImpl implements BookDao {
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate){this.jdbcTemplate=jdbcTemplate;}
 
     @Override
+    @MyLog(value = "查询价格记录")
     public int findBookPriceByIsbn(String isbn) {
         String sql="select * from book where book_id=?";
         RowMapper<Book> rowMapper=new BeanPropertyRowMapper<>(Book.class);
@@ -29,6 +32,7 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
+    @MyLog(value = "更新书库存")
     public int updateBookStock(String isbn) {
         String sql="update bookstock set stock=stock-1 where book_id = ?";
         int num=this.jdbcTemplate.update(sql,isbn);
@@ -41,6 +45,7 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
+    @MyLog(value = "从账户扣钱")
     public int updateUserAccount(String id, int price) {
 
         String sql="update account set money=money-? where id=?";
