@@ -1,7 +1,9 @@
 package cn.hcx.test;
 
 import cn.hcx.bean.User;
+import cn.hcx.dao.BookDao;
 import cn.hcx.dao.UserDao;
+import cn.hcx.service.BookService;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -93,6 +95,44 @@ public class AppTest {
         for (User act : user){
             System.out.println(act);
         }
+    }
+
+    @Test
+    public void TestFindPriceByIsdn(){
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
+        BookDao bookDao=(BookDao)applicationContext.getBean("bookDao");
+        int price=bookDao.findBookPriceByIsbn("ISBN001");
+//        System.out.println(price);
+    }
+
+    @Test
+    public void TestUpdateBookStock(){
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
+        BookDao bookDao=(BookDao)applicationContext.getBean("bookDao");
+        int num=bookDao.updateBookStock("ISBN001");
+        if (num>0){
+            System.out.println("成功更新书库存！");
+        }else {
+            System.out.println("修改操作执行失败！");
+        }
+    }
+    @Test
+    public void TestupdateUserAccount(){
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
+        BookDao bookDao=(BookDao)applicationContext.getBean("bookDao");
+        int num=bookDao.updateUserAccount("A1",58);
+        if (num>0){
+            System.out.println("成功从账户扣钱！");
+        }else {
+            System.out.println("修改操作执行失败！");
+        }
+    }
+
+    @Test
+    public void purchaseTest(){
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
+        BookService bookService=(BookService)applicationContext.getBean("bookService");
+        bookService.purchase("A1","ISBN001");
     }
 }
 
